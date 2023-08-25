@@ -13,6 +13,11 @@ int _printf(const char *format, ...)
 	char specifier;
 	va_list args;
 	va_start(args, format);
+	
+	if (*format == '\0')
+	{
+		return (0);
+	}
 
 	while (*format != '\0')
 	{
@@ -20,13 +25,11 @@ int _printf(const char *format, ...)
 		{
 			format++;
 			specifier = *format;
-
 			switch (specifier)
 			{
 				case 'c':
 					{
 						int c = va_arg(args, int);
-
 						putchar(c);
 						count++;
 						break;
@@ -34,31 +37,26 @@ int _printf(const char *format, ...)
 				case 's':
 					{
 						const char *s = va_arg(args, const char *);
-
 						while (*s != '\0')
 						{
 							putchar(*s);
 							s++;
 							count++;
 						}
-
 						break;
 					}
 				case '%':
 					{
 						putchar('%');
 						count++;
-
 						break;
 					}
-
 				case 'i':
 					{
 						int number = va_arg(args, int );
 						printf("%i", number);
 						count++;
 						break;
-
 					}
 				case 'd':
 					{
@@ -69,18 +67,13 @@ int _printf(const char *format, ...)
 					}
 			}
 		}
-
 		else
 		{
 			putchar(*format);
 			count++;
 		}
-
 		format++;
-
 	}
-
 	va_end(args);
-
 	return (count);
 }
