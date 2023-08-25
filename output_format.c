@@ -8,25 +8,25 @@
 
 int _printf(const char *format, ...)
 {
-	va_list args;
-	
-	va_start(args, format);
-
 	int count = 0;
+
+	char specifier;
+	va_list args;
+	va_start(args, format);
 
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
 			format++;
-			char specifier = *format;
+			specifier = *format;
 
 			switch (specifier)
 			{
 				case 'c':
 					{
 						int c = va_arg(args, int);
-						
+
 						putchar(c);
 						count++;
 						break;
@@ -34,7 +34,7 @@ int _printf(const char *format, ...)
 				case 's':
 					{
 						const char *s = va_arg(args, const char *);
-						
+
 						while (*s != '\0')
 						{
 							putchar(*s);
@@ -49,6 +49,22 @@ int _printf(const char *format, ...)
 						putchar('%');
 						count++;
 
+						break;
+					}
+
+				case 'i':
+					{
+						int number = va_arg(args, int );
+						printf("%i", number);
+						count++;
+						break;
+
+					}
+				case 'd':
+					{
+						double number2 = va_arg(args, double);
+						printf("%d",number2);
+						count++;
 						break;
 					}
 			}
