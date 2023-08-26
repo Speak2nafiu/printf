@@ -5,7 +5,6 @@
  *format: pointer to the file
  *Return: the number of characters priint _printf(const char *format, ...)
  */
-
 int _printf(const char *format, ...)
 {
 	int count = 0;
@@ -25,7 +24,6 @@ int _printf(const char *format, ...)
 				case 'c':
 					{
 						int c = va_arg(args, int);
-						
 						putchar(c);
 						count++;
 						break;
@@ -33,7 +31,6 @@ int _printf(const char *format, ...)
 				case 's':
 					{
 						const char *s = va_arg(args, const char *);
-						
 						while (*s != '\0')
 						{
 							putchar(*s);
@@ -48,6 +45,8 @@ int _printf(const char *format, ...)
 						count++;
 						break;
 					}
+				case 'd':
+
 				case 'i':
 					{
 						int number = va_arg(args, int );
@@ -55,22 +54,20 @@ int _printf(const char *format, ...)
 						count++;
 						break;
 					}
-				case 'd':
-					{
-						double number2 = va_arg(args, double);
-						printf("%d",number2);
-						count++;
-						break;
-					}
 			}
 		}
+		
 		else
+		
 		{
 			putchar(*format);
 			count++;
 		}
+		
 		format++;
 	}
+	
 	va_end(args);
+	
 	return (count);
 }
